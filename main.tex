@@ -13,7 +13,6 @@
 \usepackage[section]{placeins}
 \usepackage[mathscr]{euscript}
 \hypersetup{
-    bookmarks=true,         % show bookmarks bar?
     unicode=false,          % non-Latin characters 
     pdftoolbar=true,        % show Acrobat
     pdfmenubar=true,        % show Acrobat 
@@ -68,10 +67,7 @@
 
 \newcommand{\Sch}{\operatorname{Sch}}
 \newcommand{\Li}{\operatorname{Li}}
-\newcommand{\Res}{\operatorname{Res}}
 
-\newcommand{\QTr}{\widetilde{\operatorname{Tr}}}
-\newcommand{\Tr}{\operatorname{Tr}}
 \newcommand{\nn}{\nonumber}
 \newcommand{\Pf}{\operatorname{Pf}}
 \newcommand{\const}{\operatorname{const}}
@@ -141,9 +137,9 @@ Isolating the $\tau_{a,b}$ dependence of the integrand, we have a sum over $n_1,
          \label{eq:contactIntegral}
     \end{aligned}
 \end{equation}
-Using the exact expressions for $\Psi_{2, n_i}$, one can check in Mathematica that this integral vanishes for all $n_i$. I have not had the chance to derive this analytically - it's not very obvious to me yet why this has to be true, but it clearly is.
+Using the conformal expressions for $\Psi_{2, n_i}$, one can check in Mathematica that this integral vanishes for all $n_i$. I have not had the chance to derive this analytically - it's not immediately obvious why this has to be true, but it probably follows straightforwardly from some trigonometric identities. 
 
-We've shown that these diagrams vanish at leading order, but we expect this to be true regardless, since these contributions are proportional to $(\beta J)^3/N^2$. What we still need to show is that the first-order corrections, which are proportional to $(\beta J/N)^2$, also vanish. These come from considering the $\frac{1}{\beta J}$ corrections to both the kernel eigenfunctions and the Green's function in Eq.~\ref{eq:contactIntegral}.  \note{These calculations are copied from a note I wrote a few months ago. I had some difficulty understanding these notes when I read them recently, so I'm not confident that my derivation here is completely accurate, but I think the overall idea is right - the coefficients just might be off.}  We first calculate the corrections to the $h=2$ kernel eigenfunctions. In the $q \rightarrow \infty$ limit, the kernel eigenfunctions are known exactly:
+We've shown that these diagrams vanish at leading order, but we expect this to be true regardless of whether contact diagrams contribute to the Schwarzian action, since these contributions are proportional to $(\beta J)^3/N^2$. What we still need to show is that the first-order corrections, which are proportional to $(\beta J/N)^2$, also vanish. These come from considering the $\frac{1}{\beta J}$ corrections to both the kernel eigenfunctions and the Green's function in Eq.~\ref{eq:contactIntegral}.  \note{These calculations are copied from a note I wrote a few months ago. I had some difficulty understanding these notes when I read them recently, so I'm not confident that my derivation here is completely accurate, but I think the overall idea is right - the coefficients just might be off.}  We first calculate the corrections to the $h=2$ kernel eigenfunctions. In the $q \rightarrow \infty$ limit, the kernel eigenfunctions are known exactly:
 \begin{equation}
     \begin{aligned}
         \Psi_{h, n}(\tau_1, \tau_2) &= \frac{e^{iny}}{\sin\frac{\tilde{x}}{2}} \psi_{h, n}(x) \quad y = \frac{\tau_1 + \tau_2}{2} \quad x = \tau_1 = \tau_2 \quad \tilde{x} = v x + (1-v)\pi
@@ -165,8 +161,8 @@ Doing the integral over $\tau_a + \tau_b$, this gives
 \begin{equation}
     \frac{2\pi}{\beta J} \pdv{v}{(\beta J)^{-1}} \pdv{v}\left( \int \dd{x}  \psi_{2, n_1} \psi_{2, n_2} \psi_{2, n_3} G_c^{-q/2}\right) \Big|_{v=1}
 \end{equation}
-where we have absorbed the factors of $\left(\sin\frac{\tilde{x}}{2}\right)^{-1}$ into the definition of $\psi$. We find numerically that this integral vanishes if we substitute $\tilde{x} \rightarrow x$ in the equations for $\psi$. 
-This means that if we take $\epsilon = 1-v$ and expand in powers of $\epsilon$, we can obtain the following relation
+where we have absorbed the factors of $\left(\sin\frac{\tilde{x}}{2}\right)^{-1}$ into the definition of $\psi$. We find numerically that this integral vanishes if we substitute $\tilde{x} \rightarrow x$ in the equations for $\psi$. This is likely due to the same reason that the conformal vertex vanishes, although the two integrals are not exactly the same since we still have the rescaling $n \rightarrow n/v$. 
+Anyways, this means that if we take $\epsilon = 1-v$ and expand in powers of $\epsilon$, we can obtain the following relation
 \begin{equation*}
   \begin{aligned}
     &\int_0^{2\pi} \dd{x}  \psi_{2, n_1}(x) \psi_{2, n_2}(x) \psi_{2, n_3}(x) G_c^{-q/2}(x) 
@@ -199,10 +195,10 @@ If all three ladders have a soft mode, the $(\beta J/N)^2$ contributions from th
 Calculating these vertices in Mathematica shows that, at least for the discrete series, these vertices generically have some non-zero value when the conformal solutions are used (in fact, Mathematica is able to do the integrals exactly, and at least for the discrete series it should be possible to obtain an analytic expression as a function of $h$ and $n_i$). I have not looked into this extensively yet, but it seems like there are three possibilities:
 \begin{itemize}
     \item These sorts of diagrams also correspond to the Schwarzian action and must be included in order to get the answer for the six-point function that we would expect from a pure Schwarzian calculation (unlikely).
-    \item These diagrams ultimately vanish in some non-trivial manner when the summation/integration over $h$ is carried out (possible, but would be very non-trivial).
+    \item These diagrams ultimately vanish in some non-trivial manner when the summation/integration over $h$ is carried out (possible, but would be very non-trivial - although one possibility is that for a fixed $h$ and $n_i$, these diagrams are directly cancelled by the planar diagrams with the same $h$, $n_i$).
     \item There are additional $(\beta J/N)^2$ contributions to the six-point function that do not come purely from the Schwarzian sector. Roughly speaking, they correspond to an $\order{1}$ vertex coupling between the soft mode and the other modes. It's not clear to me yet whether this is an obvious contradiction or a possibility, but it seems like an interesting result if it is possible.
 \end{itemize}
-It might also be possible to understand integrals like Eq.~\ref{eq:contactVertexhneq2} on the basis of $SL(2, \mathbb{R})$ representations, by understanding the tensor decomposition of two of the eigenfunctions and using the orthogonality of different representations. This is difficult though, as the kernel eigenfunctions $\Psi_h$ are scalar eigenfunctions, or $\nu$-spinors with $\nu=0$, on the hyperbolic plane $H_2$. In the irreducible representation $\mathcal{D}^\pm_h$, the range of $\nu$ is restricted to $\abs{\nu} > h$. This means that, even though one can obtain equations for $\Psi_h$ through $SL(2, \mathbb{R})$ representations by computing the eigenfunctions of $\nu$-spinors on $H_2$ and setting $\nu=0$, the resulting functions don't actually correspond to matrix elements of unitary representations in any formal group-theoretic sense, and therefore the normal approach of tensor decompositions does not work.
+It might also be possible to understand integrals like Eq.~\ref{eq:contactVertexhneq2} on the basis of $\SL(2, \mathbb{R})$ representations, by understanding the tensor decomposition of two of the eigenfunctions and using the orthogonality of different representations. This is difficult though, as the kernel eigenfunctions $\Psi_h$ are scalar eigenfunctions, or $\nu$-spinors with $\nu=0$, on the hyperbolic plane $\text{H}_2$. In the irreducible representation $\mathcal{D}^\pm_h$, the range of $\nu$ is restricted to $\abs{\nu} > h$. This means that, even though one can obtain equations for $\Psi_h$ through $\SL(2, \mathbb{R})$ representations by computing the eigenfunctions of $\nu$-spinors on $\text{H}_2$ and setting $\nu=0$, the resulting functions don't actually correspond to matrix elements of unitary representations in any formal group-theoretic sense, and therefore the normal approach of tensor decompositions does not work.
 \section{Planar Diagrams}
 \subsection{Amputated Ladder Approach}
 The planar contributions, shown in Fig.~\ref{fig:planar} to the six-point function can be expressed as
